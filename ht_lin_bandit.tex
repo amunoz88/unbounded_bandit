@@ -1,0 +1,258 @@
+\documentclass[10pt]{article}
+
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage{natbib}
+
+\usepackage{url}
+
+% \usepackage{bbold}
+%\usepackage{titlesec}
+%\titleformat{\section}{\normalsize\bfseries}{\thesection}{1em}{}
+\makeatletter
+\renewcommand\section{\@startsection{section}{1}{\z@}%
+                                  {-3.5ex \@plus -1ex \@minus -.2ex}%
+                                  {2.3ex \@plus.2ex}%
+                                  {\normalfont\large\bfseries}}
+\renewcommand\subsection{\@startsection{subsection}{1}{\z@}%
+                                  {-3.5ex \@plus -1ex \@minus -.2ex}%
+                                  {2.3ex \@plus.2ex}%
+                                  {\normalfont\normalsize\bfseries}}                                                                
+\renewcommand\subsubsection{\@startsection{subsubsection}{1}{\z@}%
+                                  {-3.5ex \@plus -1ex \@minus -.2ex}%
+                                  {2.3ex \@plus.2ex}%
+                                  {\normalfont\small\bfseries}}                                    
+\makeatother
+
+
+% \topmargin -1.5cm        
+% \oddsidemargin -0.04cm   
+% \evensidemargin -0.04cm  
+% \textwidth 16.59cm
+% \textheight 21.94cm 
+
+\setlength{\parindent}{0in}
+
+
+
+\theoremstyle{plain}% default
+% \newtheorem{defnn}{Definition}
+%\newtheorem{thm}{Theorem}
+%\newtheorem{lem}[thm]{Lemma}
+%\newtheorem{prop}[thm]{Proposition}
+\newtheorem*{thm}{Theorem}
+\newtheorem*{lem}{Lemma}
+\newtheorem*{prop}{Proposition}
+\newtheorem*{cor}{Corollary}
+\newtheorem*{rmk}{Remark}
+\newtheorem*{notation}{Notation}
+\newtheorem*{defn}{Definition}
+
+\theoremstyle{definition}
+
+
+%spaces
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\supp}{\text{supp}}
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cK}{\mathcal{K}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cS}{\mathcal{S}}
+\renewcommand{\Re}{\text{Re}}
+\renewcommand{\Im}{\text{Im}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\gD}{\Delta}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\ca}{\alpha}
+
+%fourier transform
+\newcommand{\ft}{\mathcal{F}}
+\newcommand{\ift}{\mathcal{F}^{-1}}
+
+%editing
+\newcommand{\comments}[1]{} %e.g.  $y = x^2 + \beta$.\comments{Here is my comment. }
+
+%signs
+\newcommand{\<}{\langle}
+\renewcommand{\>}{\rangle}
+\renewcommand{\[}{\left[}
+\renewcommand{\]}{\right]}
+\renewcommand{\(}{\left(}
+\renewcommand{\)}{\right)}
+
+\newcommand{\oline}{\overline}
+\newcommand{\uline}{\underline}
+
+\newcommand{\setm}{\setminus}
+\newcommand{\sub}{\subset}
+\newcommand{\subneq}{\subsetneq}
+\newcommand{\subeq}{\subseteq}
+\renewcommand{\null}{\emptyset}
+
+
+\newcommand{\wkto}{\stackrel{w}{\rightharpoonup}}
+\newcommand{\longto}{\longrightarrow}
+\newcommand{\embed}{\hookrightarrow}
+
+
+\newcommand{\floor}[1]{\left\lfloor{#1}\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil{#1}\right\rceil}
+
+\newcommand{\lesim}{\lesssim}
+\newcommand{\gesim}{\gtrsim}
+
+
+
+%symbols
+\newcommand{\om}{\omega}
+\newcommand{\Om}{\Omega}
+\newcommand{\g}{\gamma}
+\newcommand{\G}{\Gamma}
+\newcommand{\eps}{\epsilon}
+\newcommand{\sig}{\sigma}
+\renewcommand{\a}{\alpha}
+\renewcommand{\d}{\delta}
+\renewcommand{\b}{\beta}
+\renewcommand{\phi}{\varphi}
+
+\newcommand{\bdy}{\partial}
+\newcommand{\del}{\partial}
+\newcommand{\lam}{\lambda}
+\newcommand{\E}{\mathbb{E}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\F}{\mathcal{F}}
+
+
+
+
+\begin{document}
+{\bf Heavy Tailed Linear Bandits}\\
+
+As a sanity check, consider the case in $\R^d$ where$\{\eta_s\}_{s=1}^t \in [0,1]$ are bounded, uncorrelated, mean-zero noise, and we choose the actions
+$X_s = e_{s \mod d}$. \\
+
+Let $V_t = \sum_{s=1}^t X_s X_s^T$, $V = \lambda I$, $X=(X_1,\ldots, X_t)$, and $\eta = (\eta_1,\ldots,\eta_t)$.\\
+
+We want to estimate the quantity $\P[(X\eta)^T (V+V_t)^{-1}X\eta > \eps]$.\\
+
+By our choice of $X_s$, we have that $V_t = \sum_{s=1}^t X_s X_s^T = kI$, such that $V+V_t = (\lambda + k) I$ and $(V+V_t)^{-1} = \frac{1}{\lambda + k} I$. \\
+
+Moreover, we also have that 
+\begin{align*}
+  X \eta 
+&= \sum_{s=1}^t X_s \eta_s    \\
+&= \sum_{j=1}^d \sum_{s = j \mod d} X_s \eta_s \\
+&= (\sum_{s : s = 1 \mod d} \eta_s, \ldots, \sum_{s : s = d \mod d} \eta_s)^T
+\end{align*}
+For simplicity, let $\bar{\eta}_{j\mod d} = \sum_{s:s = j\mod d} \eta_s$
+This implies that 
+\begin{align*}
+(X\eta)^T (V+V_t)^{-1}X\eta
+&= \left(\sum_{s : s = 1 \mod d} \eta_s, \ldots, \sum_{s : s = d \mod d} \eta_s\right) \frac{1}{\lambda + k} I 
+\left(\sum_{s : s = 1 \mod d} \eta_s, \ldots, \sum_{s : s = d \mod d} \eta_s\right)^T \\
+&= \sum_{j=1}^d (\bar{\eta}_{j\mod d})^2 \frac{1}{\lambda + k}\\
+&=: \psi
+\end{align*}
+By our definition for $\psi = \psi(\eta_1,\ldots,\eta_t)$, we can write
+\begin{align*}
+ \P[(X\eta)^T (V+V_t)^{-1}X\eta > \eps]
+&= \P[\psi - \E[\psi] > \eps - \E[\psi]]\\
+&\leq \exp{-\frac{2(\eps - \E[\psi])^2}{\sum_{k=1}^t c_k^2}} \text{ by McDiarmid's inequality}
+\end{align*}
+To apply McDiarmid, we can compute that for $\eta_j \neq \tilde{\eta}_j$, we have
+\begin{align*}
+ \psi(\eta) - \psi(\tilde{\eta})
+&= [ (\bar{\eta}_{j \mod d})^2 - (\bar{\tilde{\eta}}_{j \mod d})^2] \frac{1}{\lambda + k}\\
+&= \eta_j^2 - \tilde{\eta}_j^2 + \eta_j \sum_{i \neq j} \eta_i - \tilde{\eta}_j \sum_{i\neq j} \tilde{eta}_j\\
+&\leq \frac{k}{\lambda + k} 
+\end{align*}
+which implies that
+$$ \P[(X\eta)^T (V+V_t)^{-1}X\eta > \eps] \leq \exp{-\frac{2(\eps - \E[\psi])^2}{t\left(\frac{k}{\lambda + k}\right)^2}}$$
+Setting the RHS equal to $\delta$ and solving yields
+\begin{align*}
+ &\exp{-\frac{2(\eps - \E[\psi])^2}{t\left(\frac{k}{\lambda + k}\right)^2}} = \delta \\
+&\Leftrightarrow \frac{(\eps - \E[\psi])^2}{t\left(\frac{k}{\lambda + k}\right)^2} = \frac{\log(1/\delta)}{2} \\
+&\Leftrightarrow \eps = \sqrt{\frac{\log(1/\d) t \left(\frac{k}{\lambda + k}\right)^2}{2}} + \E[\psi]
+\end{align*}
+so that with probability $\geq 1- \d$, we have
+$$\psi \leq \sqrt{\frac{\log(1/\d) t \left(\frac{k}{\lambda + k}\right)^2}{2}} + \E[\psi]$$
+and we can compute that
+\begin{align*}
+\E[\psi] 
+&= \E[\sum_{j=1}^d (\bar{\eta}_{j \mod d})^2 \frac{1}{\lambda + k}] \\
+&\leq \frac{1}{\lambda + k} \E[\sum_{j=1}^d \sum_{s: s =j \mod d} \eta_s^2] \text{ (by uncorrelated and mean zero of $\eta$)}\\
+&= \frac{1}{\lambda + k} \E[\sum_{s=1}^t \eta_s^2] \\
+&\leq \frac{kd}{\lambda + k} \E[\eta^2] 
+\end{align*}
+so that with probability $\geq 1- \d$, we have
+\begin{align*}
+\psi 
+&\leq \sqrt{t\frac{\log(1/\d) \left(\frac{k}{\lambda + k}\right)^2}{2}} + \frac{kd}{\lambda + k} \E[\eta^2]  \\
+&= \cO(\sqrt{t} + d)
+\end{align*}
+
+{\bf More general scenario}\\
+
+$X = (X_1,\ldots, X_t)$ is $d \times t$, where $t = kd$.\\
+
+Let $A$ be a $d \times d$ matrix such that $k AA^T = XX^T$. This is possible because if we write $XX^T = Q \Lambda Q^T$, $Q$ $d \times d$, then we can let
+$A = \frac{1}{\sqrt{k}} Q \sqrt{\Lambda}$.\\
+
+This implies that 
+\begin{align*}
+ (X\eta)^T (\lambda I + XX^T)^{-1}(X\eta)
+&= (X\eta)^T(\lambda I + k AA^T)^{-1}(X\eta)
+\end{align*}
+Now, we want to write $X\eta = A \sum_{i=1}^t P_i \eta_i$ for vectors $P_i$. If we can do this, then the above expression can be written as
+\begin{align*}
+ (X\eta)^T(\lambda I + k AA^T)^{-1}(X\eta)
+&= (\sum_{i=1}^t P_i \eta_i) A^T (\lambda I + k AA^T)^{-1} A (\sum_{i=1}^t P_i \eta_i) 
+\end{align*}
+Now, notice that 
+$$A^T (\lambda I + k AA^T)^{-1} A = A^TA(\lambda I + k AA^T)^{-1}$$
+and 
+$$A^TA = \frac{1}{\sqrt{k}} \sqrt{\Lambda} Q^T \frac{1}{\sqrt{k}} Q \sqrt{\Lambda} = \frac{1}{k} \Lambda$$
+This implies that 
+\begin{align*}
+A^TA(\lambda I + k AA^T)^{-1} 
+&= \frac{1}{k} \Lambda(\lambda I + \Lambda)^{-1}\\
+&= [\frac{1}{k} \Lambda_j \frac{1}{\lambda + \Lambda_j}]_j \\ 
+&\leq \frac{1}{k} \frac{\Lambda^*}{\lambda + \Lambda^*} I \text{ (where $\Lambda^*$ is the eigenvalue that maximizes this quantity)}
+\end{align*}
+Going back to the claim $X\eta = A \sum_{i=1}^t P_i \eta_i$, we see that this is possible because 
+$X = Q\sqrt{\Lambda}R^T$ (SVD of $X$ using the known spectral decomposition of $XX^T$)
+ and $A = \frac{1}{\sqrt{k}}Q\sqrt{\Lambda}$ imply that to get $X = A(P_1,\ldots,P_t)$, we can set
+$$(P_1,\ldots,P_t) = \sqrt{k}R^T$$
+
+This implies that 
+\begin{align*}
+\left|(X\eta)^T (\lambda I + XX^T)^{-1}(X\eta) \right|
+&\leq \left|\frac{1}{k} \frac{\Lambda^*}{\lambda + \Lambda^*} \eta^T RR^T \eta k \right|\\
+&= \frac{\Lambda^*}{\lambda + \Lambda^*} \left|\eta^T (X \Lambda^{-1/2})^T (X \Lambda^{-1/2}) \eta  \right| \text{ (since $X=Q\sqrt{\Lambda}R^T$)}\\
+&= \frac{\Lambda^*}{\lambda + \Lambda^*} \left|\eta^T \Lambda^{-1/2} X^TX \Lambda^{-1/2} \eta \right| 
+\end{align*}
+
+
+
+
+
+
+
+
+\end{document}
